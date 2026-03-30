@@ -1,0 +1,465 @@
+/* --- 1. ПЕРЕМЕННЫЕ И БАЗОВЫЕ СТИЛИ --- */
+:root {
+    --burgundy: #4a0404;
+    --gold: #f1d5a5;
+    --dark: #120005;
+    --glass: rgba(255, 255, 255, 0.05);
+    --text-main: #eee;
+    --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* { 
+    box-sizing: border-box; 
+}
+
+body {
+    margin: 0;
+    background: radial-gradient(circle, #630606, #1a0005);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    transition: opacity 0.6s ease;
+    overflow-x: hidden;
+}
+
+/* --- 2. СЛУЖЕБНЫЕ КЛАССЫ И КНОПКИ --- */
+.center-mode {
+    justify-content: center;
+    align-items: center;
+}
+
+.fade-out { 
+    opacity: 0; 
+}
+
+.main-wrapper {
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btn {
+    display: inline-block;
+    padding: 12px 30px;
+    background: transparent;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    text-decoration: none;
+    border-radius: 30px;
+    transition: var(--transition);
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn:hover { 
+    background: var(--gold); 
+    color: var(--burgundy); 
+    box-shadow: 0 0 20px rgba(241, 213, 165, 0.4);
+}
+
+/* --- 3. СТРАНИЦА ПРОСМОТРА (photo.html) --- */
+.full-view-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    gap: 20px;
+    padding: 20px;
+    margin: auto;
+}
+
+.photo-article {
+    width: 100%;
+    max-height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid rgba(241, 213, 165, 0.2);
+}
+
+#displayImg {
+    max-width: 100%;
+    max-height: 60vh;
+    object-fit: contain;
+    display: block;
+}
+
+.article-content {
+    text-align: center;
+    background: var(--glass);
+    padding: 25px;
+    border-radius: 15px;
+    width: 100%;
+    border-top: 2px solid var(--gold);
+    backdrop-filter: blur(5px);
+}
+
+#articleTitle {
+    color: var(--gold);
+    margin: 0 0 10px 0;
+    font-size: 1.8rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+#articleText {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #f0f0f0;
+    margin: 0;
+}
+
+/* --- 4. ГРИД ГАЛЕРЕИ --- */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.item {
+    aspect-ratio: 1/1;
+    background: var(--glass);
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid rgba(241, 213, 165, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, filter 1.2s ease;
+}
+
+.item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px var(--gold);
+}
+
+/* --- 5. ЦИТАТЫ --- */
+.quote-of-the-day {
+    width: 100%;
+    background: var(--glass);
+    border: 1px solid rgba(241, 213, 165, 0.3);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 40px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+}
+
+#dailyQuoteText {
+    font-style: italic;
+    font-size: 1.2rem;
+    color: var(--gold);
+    margin-bottom: 10px;
+    display: block;
+}
+
+#quoteTimer {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.6);
+    text-transform: uppercase;
+    font-family: 'Courier New', monospace;
+}
+
+/* --- 6. ПИСЬМА --- */
+.letters-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    margin: 40px 0;
+    width: 100%;
+}
+
+.letter-item {
+    width: 110px;
+    perspective: 1000px;
+}
+
+.letter-card {
+    background: rgba(74, 4, 4, 0.4);
+    border: 1px solid var(--gold);
+    border-radius: 12px;
+    padding: 15px 10px;
+    text-align: center;
+    transition: var(--transition);
+}
+
+.letter-icon { font-size: 2rem; margin-bottom: 8px; }
+
+.letter-label {
+    margin-top: 10px;
+    font-size: 0.75rem;
+    color: var(--gold);
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.timer {
+    font-size: 0.7rem;
+    color: #fff;
+    font-family: 'Courier New', monospace;
+    background: rgba(0,0,0,0.3);
+    padding: 2px 5px;
+    border-radius: 4px;
+}
+
+.letter-item.unlocked:hover .letter-card {
+    transform: translateY(-10px) rotateX(10deg);
+    box-shadow: 0 10px 25px rgba(241, 213, 165, 0.4);
+}
+
+.letter-item.locked { filter: grayscale(0.8); opacity: 0.6; }
+
+/* --- 7. МУЗЫКАЛЬНЫЙ СЛАЙДЕР (НОВОЕ) --- */
+.music-section {
+    width: 100%;
+    perspective: 1200px;
+    padding: 40px 0;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.music-carousel {
+    position: relative;
+    width: 100%;
+    height: 380px;
+    transform-style: preserve-3d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.music-card {
+    position: absolute;
+    width: 260px;
+    height: 350px;
+    background: var(--glass);
+    border: 1px solid rgba(241, 213, 165, 0.3);
+    border-radius: 20px;
+    backdrop-filter: blur(15px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 25px;
+    transition: var(--transition);
+    cursor: pointer;
+    user-select: none;
+}
+
+/* 3D Позиции */
+.music-card.active {
+    transform: translate3d(0, 0, 150px);
+    z-index: 10;
+    opacity: 1;
+    border-color: var(--gold);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+}
+
+.music-card.prev {
+    transform: translate3d(-160px, 0, 0) scale(0.8) rotateY(20deg);
+    z-index: 5;
+    opacity: 0.5;
+    filter: blur(3px);
+}
+
+.music-card.next {
+    transform: translate3d(160px, 0, 0) scale(0.8) rotateY(-20deg);
+    z-index: 5;
+    opacity: 0.5;
+    filter: blur(3px);
+}
+
+.music-card.hidden {
+    transform: translate3d(0, 0, -300px) scale(0.5);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.song-cover {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 4px solid var(--gold);
+    object-fit: cover;
+    margin-bottom: 15px;
+    transition: transform 0.8s ease;
+}
+
+/* Анимация пластинки при воспроизведении */
+.music-card.active .song-cover.playing {
+    animation: rotateVinyl 6s linear infinite;
+}
+
+@keyframes rotateVinyl {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.song-info { text-align: center; margin-bottom: 20px; }
+.song-title { color: var(--gold); font-size: 1.2rem; font-weight: bold; display: block; }
+.song-artist { color: #aaa; font-size: 0.9rem; margin-top: 5px; display: block; }
+
+.play-btn {
+    background: var(--gold);
+    color: var(--burgundy);
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 1.4rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+}
+
+.play-btn:hover { transform: scale(1.1); }
+
+/* --- 8. ДОРОЖНАЯ КАРТА --- */
+.section-title {
+    color: var(--gold);
+    margin: 40px 0 20px 0;
+    text-shadow: 0 0 10px rgba(241, 213, 165, 0.5);
+    font-size: 1.8rem;
+    text-align: center;
+}
+
+.roadmap-wrapper {
+    position: relative;
+    width: 100%;
+    height: 160px;
+    margin-bottom: 30px;
+}
+
+.road-svg { position: absolute; width: 100%; height: 100%; z-index: 1; }
+
+.heart-point {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: translate(-50%, -50%);
+    transition: var(--transition);
+    z-index: 10;
+}
+
+.heart-point:hover { transform: translate(-50%, -50%) scale(1.2); }
+
+.heart-shape {
+    width: 30px;
+    height: 30px;
+    background-color: var(--gold);
+    position: relative;
+    transform: rotate(45deg);
+}
+
+.heart-shape::before, .heart-shape::after {
+    content: ""; width: 30px; height: 30px;
+    background-color: var(--gold);
+    border-radius: 50%; position: absolute;
+}
+.heart-shape::before { top: -15px; left: 0; }
+.heart-shape::after { left: -15px; top: 0; }
+
+.heart-point span {
+    position: absolute;
+    z-index: 11;
+    font-size: 10px;
+    font-weight: 900;
+    color: var(--burgundy);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -60%);
+}
+
+/* --- 9. МОДАЛЬНОЕ ОКНО --- */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(18, 0, 5, 0.95);
+    z-index: 9999;
+    justify-content: center; align-items: center;
+    backdrop-filter: blur(15px);
+}
+
+.modal-content {
+    position: relative;
+    width: 90%; max-width: 600px;
+    display: flex; flex-direction: column; align-items: center;
+    animation: fadeIn 0.5s ease;
+    gap: 15px;
+}
+
+.swiper-img {
+    width: 100%; max-height: 60vh;
+    object-fit: contain;
+    border-radius: 15px;
+    border: 1px solid var(--gold);
+    background: #000;
+}
+
+.swiper-caption {
+    background: var(--glass);
+    padding: 15px;
+    border-radius: 12px;
+    width: 100%;
+    text-align: center;
+    color: #f0f0f0;
+}
+
+.swiper-nav { display: flex; gap: 20px; }
+
+.nav-btn {
+    background: transparent;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    width: 45px; height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.close-btn {
+    position: absolute;
+    top: -60px; right: 0;
+    font-size: 3rem; color: var(--gold); cursor: pointer;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+/* --- 10. АДАПТИВНОСТЬ --- */
+@media (max-width: 650px) {
+    .grid { gap: 8px; }
+    .music-carousel { height: 320px; }
+    .music-card { width: 200px; height: 300px; padding: 15px; }
+    .music-card.prev { transform: translate3d(-100px, 0, 0) scale(0.7); }
+    .music-card.next { transform: translate3d(100px, 0, 0) scale(0.7); }
+    .song-cover { width: 110px; height: 110px; }
+    #articleTitle { font-size: 1.4rem; }
+    .photo-article, #displayImg { max-height: 50vh; }
+}

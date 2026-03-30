@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+   <h3>МОНАСТЫРЬ СВЯТОЙ СОФИИ</h3>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="center-mode">
+    <div class="main-wrapper">
+        
+        <div class="grid">
+            <div class="item" onclick="navigate('photo.html?id=1')"><img src="images/1.jpg"></div>
+            <div class="item" onclick="navigate('photo.html?id=2')"><img src="images/2.jpg"></div>
+            <div class="item" onclick="navigate('photo.html?id=3')"><img src="images/3.jpg"></div>
+            <div class="item" onclick="navigate('photo.html?id=4')"><img src="images/4.jpg"></div>
+            <div class="item" onclick="navigate('photo.html?id=5')"><img src="images/5.jpg"></div>
+            <div class="item" onclick="navigate('photo.html?id=6')"><img src="images/6.jpg"></div>
+            <div class="item" onclick="navigate('photo.html?id=7')"><img src="images/7.jpg"></div>
+            <div class="item" onclick="navigate('photo.html?id=8')"><img src="images/8.jpg"></div>
+            <div class="item" onclick="navigate('photo.html?id=9')"><img src="images/9.jpg"></div>
+        </div>
+
+        <div class="quote-of-the-day">
+            <span id="dailyQuoteText"></span>
+            <div id="quoteTimer"></div>
+        </div>
+
+        <div id="lettersContainer" class="letters-section">
+            </div>
+            
+<h4 class="section-title">МУЗЫКА КОТОРАЯ АСОЦИИРУЕТЬСЯ С ТОБОЙ</h4>
+        <div class="music-section">
+            <div class="music-carousel" id="musicCarousel">
+                </div>
+        </div>
+
+        <h2 class="section-title">ТОЧКИ ВОСПОМИНАНИЙ</h2>
+        <div class="roadmap-wrapper">
+            <svg class="road-svg" viewBox="0 0 500 200" preserveAspectRatio="none">
+                <path d="M0,100 C100,200 150,0 250,100 C350,200 400,0 500,100" 
+                      fill="none" stroke="rgba(241, 213, 165, 0.4)" stroke-width="6" stroke-dasharray="10"/>
+            </svg>
+
+            <div class="roadmap-points">
+                <div class="heart-point" style="left: 5%; top: 50%;" onclick="openTravel('milestone1')">
+                    <div class="heart-shape"></div><span>CCB</span>
+                </div>
+            
+                <div class="heart-point" style="left: 50%; top: 50%;" onclick="openTravel('milestone3')">
+                    <div class="heart-shape"></div><span>ATF</span>
+                </div>
+               
+                <div class="heart-point" style="left: 95%; top: 50%;" onclick="openTravel('milestone5')">
+                    <div class="heart-shape"></div><span>MYK</span>
+                </div>
+            </div>
+        </div>
+
+        <a href="#" onclick="navigate('index.html')" class="btn" style="margin-top: 50px;">На головну</a>
+    </div>
+
+    <div id="travelModal" class="modal">
+        <span class="close-btn" onclick="closeTravel()">&times;</span>
+        <div class="modal-content">
+            <div id="swiper-inner">
+                </div>
+            <div class="swiper-nav">
+                <button class="nav-btn" onclick="prevSlide()">❮</button>
+                <button class="nav-btn" onclick="nextSlide()">❯</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
