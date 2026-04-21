@@ -350,7 +350,27 @@ function updateSwiper() {
 
 function nextSlide() { currentIndex = (currentIndex + 1) % currentSet.length; updateSwiper(); }
 function prevSlide() { currentIndex = (currentIndex - 1 + currentSet.length) % currentSet.length; updateSwiper(); }
-function closeTravel() { document.getElementById('travelModal').style.display = 'none'; }
+// Найди это в script.js:
+function closeTravel() { 
+    document.getElementById('travelModal').style.display = 'none'; 
+}
+
+// И СРАЗУ ПОД НЕЙ добавь вот это:
+window.addEventListener('click', (e) => {
+    const modal = document.getElementById('travelModal');
+    // Если кликнули по самому фону модалки (не по картинке и не по кнопкам)
+    if (e.target === modal) {
+        closeTravel();
+    }
+});
+
+// И для надежности добавим закрытие на кнопку "Назад" в телефоне
+window.addEventListener('popstate', () => {
+    const modal = document.getElementById('travelModal');
+    if (modal.style.display === 'flex') {
+        closeTravel();
+    }
+});
 
 // Ефект дискотеки
 let discoInterval, idleTimer, lastItem = null;
