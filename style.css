@@ -227,7 +227,7 @@ body {
 
 .letter-item.locked { filter: grayscale(0.8); opacity: 0.6; }
 
-/* --- 7. МУЗЫКАЛЬНЫЙ СЛАЙДЕР (НОВОЕ) --- */
+/* --- 7. МУЗЫКАЛЬНЫЙ СЛАЙДЕР --- */
 .music-section {
     width: 100%;
     perspective: 1200px;
@@ -264,7 +264,6 @@ body {
     user-select: none;
 }
 
-/* 3D Позиции */
 .music-card.active {
     transform: translate3d(0, 0, 150px);
     z-index: 10;
@@ -303,7 +302,6 @@ body {
     transition: transform 0.8s ease;
 }
 
-/* Анимация пластинки при воспроизведении */
 .music-card.active .song-cover.playing {
     animation: rotateVinyl 6s linear infinite;
 }
@@ -393,16 +391,18 @@ body {
     transform: translate(-50%, -60%);
 }
 
-/* --- 9. МОДАЛЬНОЕ ОКНО --- */
+/* --- 9. МОДАЛЬНОЕ ОКНО (ИСПРАВЛЕНО) --- */
 .modal {
     display: none;
     position: fixed;
     top: 0; left: 0;
     width: 100%; height: 100%;
-    background: rgba(18, 0, 5, 0.95);
+    background: rgba(18, 0, 5, 0.98); /* Сделал чуть темнее для акцента */
     z-index: 9999;
-    justify-content: center; align-items: center;
+    justify-content: center; 
+    align-items: center;
     backdrop-filter: blur(15px);
+    cursor: pointer; /* Показывает, что можно кликнуть для выхода */
 }
 
 .modal-content {
@@ -411,6 +411,7 @@ body {
     display: flex; flex-direction: column; align-items: center;
     animation: fadeIn 0.5s ease;
     gap: 15px;
+    cursor: default; /* Внутри контента курсор обычный */
 }
 
 .swiper-img {
@@ -441,50 +442,32 @@ body {
     cursor: pointer;
 }
 
-/* В style.css найди и замени эти блоки: */
-
+/* КНОПКА ЗАКРЫТИЯ - ГЛАВНЫЕ ПРАВКИ */
 .close-btn {
-    position: absolute;
-    top: -50px; /* Немного опустим */
-    right: 10px;
-    font-size: 3.5rem; /* Сделаем жирнее, чтобы легче попадать пальцем */
+    position: fixed; /* Фиксируем относительно экрана, а не контента */
+    top: 20px;
+    right: 20px;
+    font-size: 2.5rem;
     color: var(--gold);
     cursor: pointer;
-    z-index: 10001;
+    z-index: 10005; /* Самый высокий слой */
     line-height: 1;
-}
-
-.modal-content {
-    position: relative;
-    width: 95%; /* Чуть шире на мобилках */
-    max-width: 600px;
+    background: rgba(74, 4, 4, 0.9);
+    width: 50px;
+    height: 50px;
     display: flex;
-    flex-direction: column;
     align-items: center;
-    animation: fadeIn 0.3s ease;
-    gap: 10px;
-    padding: 10px;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid var(--gold);
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    transition: var(--transition);
 }
 
-/* Добавь это в конец style.css, чтобы на мобилках кнопка закрытия была внутри или заметнее */
-@media (max-width: 650px) {
-    .close-btn {
-        top: -60px;
-        right: 50%;
-        transform: translateX(50%); /* Ставим крестик по центру над фото */
-        background: rgba(255,255,255,0.1);
-        border-radius: 50%;
-        width: 60px;
-        height: 60px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.9); }
-    to { opacity: 1; transform: scale(1); }
+.close-btn:hover {
+    transform: scale(1.1);
+    background: var(--gold);
+    color: var(--burgundy);
 }
 
 /* --- 10. АДАПТИВНОСТЬ --- */
@@ -497,4 +480,23 @@ body {
     .song-cover { width: 110px; height: 110px; }
     #articleTitle { font-size: 1.4rem; }
     .photo-article, #displayImg { max-height: 50vh; }
+    
+    /* Для мобилок крестик чуть меньше и заметнее */
+    .close-btn {
+        top: 15px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+        font-size: 2rem;
+    }
+    
+    .modal-content {
+        width: 95%;
+        padding-top: 40px; 
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
